@@ -4,6 +4,12 @@ class Fraction():
     def __init__(self, num, den):
         self.num = num
         self.den = den
+        if self.den == 0:
+            print("Divide by zero error.")
+            print(str(1/0)) 
+        if (self.den) < 0:
+            self.num *= -1
+            self.den *= -1
         self.__simplify()
 
     def add(self, otherFraction):
@@ -27,8 +33,11 @@ class Fraction():
     def div(self, otherFraction):
         newNum = self.num * otherFraction.den
         newDen = self.den * otherFraction.num
-        answerFraction = Fraction(newNum, newDen)
-        return(answerFraction)
+        if newDen == 0:
+            print("Divide by zero error.")
+        else:
+            answerFraction = Fraction(newNum, newDen)
+            return(answerFraction)
 
     def __simplify(self):
         commonDen = gcd(int(self.num), int(self.den))
@@ -52,18 +61,23 @@ class Fraction():
         else:
             return(False)
 
-numFractionA = int(input("Enter numerator of fractionA: "))
-denFractionA = int(input("Enter denominator of fractionA: "))
-numFractionB = int(input("Enter numerator of fractionB: "))
-denFractionB = int(input("Enter denominator of fractionB: "))
+if __name__ == "__main__":
 
-fractionA = Fraction(numFractionA, denFractionA)
-fractionB = Fraction(numFractionB, denFractionB)
-fractionA.print_fraction()
-fractionB.print_fraction()
-fractionA.add(fractionB).print_fraction()
-fractionA.sub(fractionB).print_fraction()
-fractionA.mul(fractionB).print_fraction()
-fractionA.div(fractionB).print_fraction()
-print(fractionA.find_if_equal(fractionB))
-print(fractionA.find_if_greater(fractionB))
+    fractionA = Fraction(33, -7)
+    fractionB = Fraction(-8, 2)
+    print("Fraction A simplified:")
+    fractionA.print_fraction()
+    print("Fraction B simplified:")
+    fractionB.print_fraction()
+    print("Add:")
+    fractionA.add(fractionB).print_fraction()
+    print("Sub:")
+    fractionA.sub(fractionB).print_fraction()
+    print("Mul:")
+    fractionA.mul(fractionB).print_fraction()
+    print("Div:")
+    fractionA.div(fractionB).print_fraction()
+    print("Equal?")
+    print(fractionA.find_if_equal(fractionB))
+    print ("A > B?")
+    print(fractionA.find_if_greater(fractionB))
